@@ -4,8 +4,8 @@ let x31 = 1, x32 = 0, resultado3 = 1
 let x41 = 1, x42 = 0, resultado4 = 1
 
 let p1 = -1, p2 = -1
-
 let soma, ajustes, quantidadeAjustesTotais = 0, repeticoes = 0
+
 
 do {
     ajustes = 0
