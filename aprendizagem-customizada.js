@@ -1,6 +1,6 @@
 class Neuronio {
     constructor(numeroEntradas) {
-        this.numeroEntradas = this.numeroEntradas;
+        this.numeroEntradas = numeroEntradas; 
         this.pesos = [];
 
         for (let i = 0; i < numeroEntradas; i++) {
@@ -25,7 +25,7 @@ class Neuronio {
     processar(entrada) {
         let somaPonderada = this.somar(entrada);
         let saida = this.ativacao(somaPonderada);
-        return saida
+        return saida;
     }
 
     ajustar(erro, entrada){
@@ -38,12 +38,12 @@ class Neuronio {
     treinarRede(arrayTreinamento) {
         let ajustesNecessarios = true;
 
-        while(ajustesNecessarios) {
+        while (ajustesNecessarios) {
             ajustesNecessarios = false;
 
             for (let i = 0; i < arrayTreinamento.length; i++) {
                 const entrada = arrayTreinamento[i].entrada;
-                const resultadoEsperado = arrayTreinamento[i].resultadoEsperado;
+                const resultadoEsperado = arrayTreinamento[i].resultadoEsperado[0]; 
                 const resultadoObtido = this.processar(entrada);
                 const erro = resultadoEsperado - resultadoObtido;
 
@@ -57,26 +57,24 @@ class Neuronio {
 }
 
 const treinamento = [
-    {entrada: [0, 0, 0], resultadoEsperado: [0]},//Laranja - citrico
-    {entrada: [0, 0, 1], resultadoEsperado: [0]},//abacaxi - citico
-    {entrada: [0, 1, 0], resultadoEsperado: [0]},//morango - citrico
-    {entrada: [0, 1, 1], resultadoEsperado: [0]},//kiwi - citrico
-    {entrada: [1, 0, 0], resultadoEsperado: [1]},//mamão - doce
-    {entrada: [1, 0, 1], resultadoEsperado: [1]},//mamão - doce
-    {entrada: [1, 1, 0], resultadoEsperado: [1]},//mamão - doce
-    {entrada: [1, 1, 1], resultadoEsperado: [1]},//mamão - doce
+    {entrada: [0, 0, 0], resultadoEsperado: [0]}, // Laranja - cítrico
+    {entrada: [0, 0, 1], resultadoEsperado: [0]}, // Abacaxi - cítrico
+    {entrada: [0, 1, 0], resultadoEsperado: [0]}, // Morango - cítrico
+    {entrada: [0, 1, 1], resultadoEsperado: [0]}, // Kiwi - cítrico
+    {entrada: [1, 0, 0], resultadoEsperado: [1]}, // Mamão - doce
+    {entrada: [1, 0, 1], resultadoEsperado: [1]}, // Mamão - doce
+    {entrada: [1, 1, 0], resultadoEsperado: [1]}, // Mamão - doce
+    {entrada: [1, 1, 1], resultadoEsperado: [1]}, // Mamão - doce
 ];
 
-neuronio = new Neuronio(3);
+let neuronio = new Neuronio(3); 
 neuronio.treinarRede(treinamento);
 
-let resultado = neuronio.processar([0,0,0])
+let resultadoArray = ["Cítrico", "Doce"];
 
-if(resultado == 0){
-    console.log("A fruta informada é citrica.");
-} else {
-    console.log("A fruta informada é doce.")
-}
+let resultado = neuronio.processar([0, 0, 0]);
+console.log("A fruta informada é " + resultadoArray[resultado]);
 
 console.log("Rede treinada com sucesso.");
+
 
